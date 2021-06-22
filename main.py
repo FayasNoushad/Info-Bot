@@ -1,5 +1,6 @@
 import os
 from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 FayasNoushad = Client(
     "User-Info-Bot",
@@ -7,6 +8,12 @@ FayasNoushad = Client(
     api_id = int(os.environ["API_ID"]),
     api_hash = os.environ["API_HASH"]
 )
+
+BUTTONS = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='https://telegram.me/FayasNoushad')
+        ]]
+    )
 
 @FayasNoushad.on_message(filters.private & filters.text)
 async def user_info(bot, update):
@@ -26,6 +33,7 @@ async def user_info(bot, update):
         text += f"\n\nMade by @FayasNoushad"
         await update.reply_text(
             text=text,
+            reply_markup=BUTTONS,
             disable_web_page_preview=True,
             quote=True
         )
