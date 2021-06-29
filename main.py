@@ -49,6 +49,8 @@ async def info(bot, update):
             disable_web_page_preview=True,
             quote=True
         )
+    except Exception as error:
+        await update.reply_text(error)
 
 def user_info(user):
     text = "--**User Details:**--\n"
