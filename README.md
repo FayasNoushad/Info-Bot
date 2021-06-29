@@ -1,4 +1,4 @@
-# User-Info-Bot
+# Info-Bot
 
 A telegram user info bot.
 
