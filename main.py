@@ -35,12 +35,14 @@ async def start(bot, update):
 
 @FayasNoushad.on_message(filters.private & filters.text)
 async def info(bot, update):
-    if int(update.text) > 0:
-        user = await bot.get_users(int(update.text))
-        info = user_info(user)
-    else:
-        chat = await bot.get_chat(int(update.text))
-        info = chat
+    if (update.text == '/info' or update.text == '/information':
+        if (not update.reply_to_message) and (not update.forward_from or update.forward_from_chat):
+            user = update.from_user
+        if update.reply_to_message and update.reply_to_message.forward_from:
+            user = update.forward_from
+        if update.reply_to_message and update.reply_to_message.forward_from_chat:
+            user = update.forward_from_chat
+    info = user_info(user)
     await update.reply_text(
         text=info,
         reply_markup=BUTTONS,
