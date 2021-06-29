@@ -59,7 +59,7 @@ def user_info(user):
     text += f"\n**Last Name:** `{user.last_name},`" if user.last_name else ""
     text += f"\n**User Id:** `{user.id}`"
     text += f"\n**Username:** @{user.username}" if user.username else ""
-    text += f"\n**Type:** `{chat.type}`"
+    text += f"\n**Type:** `{user.type}`"
     text += f"\n**User Link:** {user.mention}" if user.username else ""
     text += f"\n**DC ID:** `{user.dc_id}`" if user.dc_id else ""
     text += f"\n**Is Deleted:** True" if user.is_deleted else ""
