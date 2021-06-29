@@ -37,7 +37,7 @@ async def start(bot, update):
 async def info(bot, update):
     if int(update.text) > 0:
         user = await bot.get_users(int(update.text))
-        info = user_info(bot, update, user)
+        info = user_info(user)
     else:
         chat = await bot.get_chat(int(update.text))
         info = chat
