@@ -12,7 +12,10 @@ FayasNoushad = Client(
 )
 
 START_TEXT = """
-Hello {}, I am a user info telegram bot. Send me a user id.
+Hello {}, I am a user or chat information finder telegram bot.
+
+- Send /info for your info
+- Send /info reply to a forward message for chat or user info
 
 Made by @FayasNoushad
 """
@@ -43,6 +46,8 @@ async def info(bot, update):
         info = chat_info(update.reply_to_message.forward_from_chat)
     elif (update.reply_to_message and update.reply_to_message.from_user) and (not update.forward_from or not update.forward_from_chat):
         info = user_info(update.reply_to_message.from_user)
+    else:
+        return
     try:
         await update.reply_text(
             text=info,
