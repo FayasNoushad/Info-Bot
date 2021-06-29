@@ -33,9 +33,13 @@ async def start(bot, update):
     )
 
 @FayasNoushad.on_message(filters.private & filters.text)
-async def user_info(bot, update):
-    try:
+async def info(bot, update):
+    if int(update.text) > 0:
         user = await bot.get_users(int(update.text))
+        await user_info(bot, update, user)
+
+async def user_info(bot, update, user):
+    try:
         text = "--**User Details:**--\n"
         text += f"\n**First Name:** `{user.first_name}`"
         text += f"\n**Last Name:** `{user.last_name}`\n\n" if user.last_name else ""
