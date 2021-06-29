@@ -35,12 +35,14 @@ async def start(bot, update):
 
 @FayasNoushad.on_message(filters.private & filters.command(["info", "information"]))
 async def info(bot, update):
-    if (not update.reply_to_message) and (not update.forward_from or update.forward_from_chat):
+    if (not update.reply_to_message) and ((not update.forward_from) or (not update.forward_from_chat)):
         info = user_info(update.from_user)
     elif update.reply_to_message and update.reply_to_message.forward_from:
         info = user_info(update.reply_to_message.forward_from)
     elif update.reply_to_message and update.reply_to_message.forward_from_chat:
         info = update.reply_to_message.forward_from_chat 
+    elif (update.reply_to_message and update.reply_to_message.from_user) and (not update.forward_from or not update.forward_from_chat):
+        info = user_info(update.reply_to_message.from_user)
     try:
         await update.reply_text(
             text=info,
