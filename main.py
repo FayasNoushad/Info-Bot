@@ -22,7 +22,7 @@ BUTTONS = InlineKeyboardMarkup(
         ]]
     )
 
-@FayasNoushad.on_message(filters.command(["start"]))
+@FayasNoushad.on_message(filters.private & filters.command(["start"]))
 async def start(bot, update):
     text = START_TEXT.format(update.from_user.mention)
     reply_markup = BUTTONS
@@ -33,15 +33,14 @@ async def start(bot, update):
         quote=True
     )
 
-@FayasNoushad.on_message(filters.private & filters.text)
+@FayasNoushad.on_message(filters.private & filters.text & filters.command(["info", "information"]))
 async def info(bot, update):
-    if update.text == '/info' or update.text == '/information':
-        if (not update.reply_to_message) and (not update.forward_from or update.forward_from_chat):
-            info = user_info(update.from_user)
-        if update.reply_to_message and update.reply_to_message.forward_from:
-            info = user_info(forward_from)
-        if update.reply_to_message and update.reply_to_message.forward_from_chat:
-            chat = update.forward_from_chat 
+    if (not update.reply_to_message) and (not update.forward_from or update.forward_from_chat):
+        info = user_info(update.from_user)
+    elif update.reply_to_message and update.reply_to_message.forward_from:
+        info = user_info(forward_from)
+    elif update.reply_to_message and update.reply_to_message.forward_from_chat:
+        info = update.forward_from_chat 
     try:
         await update.reply_text(
             text=info,
