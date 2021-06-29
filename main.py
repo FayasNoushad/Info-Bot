@@ -37,6 +37,9 @@ async def info(bot, update):
     if int(update.text) > 0:
         user = await bot.get_users(int(update.text))
         await user_info(bot, update, user)
+    else:
+        chat = await bot.get_chat(int(update.text))
+        await update.reply_text(chat)
 
 async def user_info(bot, update, user):
     try:
