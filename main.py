@@ -33,7 +33,7 @@ async def start(bot, update):
         quote=True
     )
 
-@FayasNoushad.on_message(filters.private & filters.text & filters.command(["info", "information"]))
+@FayasNoushad.on_message(filters.private & filters.command(["info", "information"]))
 async def info(bot, update):
     if (not update.reply_to_message) and (not update.forward_from or update.forward_from_chat):
         info = user_info(update.from_user)
