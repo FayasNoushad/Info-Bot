@@ -40,7 +40,7 @@ async def info(bot, update):
     elif update.reply_to_message and update.reply_to_message.forward_from:
         info = user_info(update.reply_to_message.forward_from)
     elif update.reply_to_message and update.reply_to_message.forward_from_chat:
-        info = update.reply_to_message.forward_from_chat 
+        info = chat_info(update.reply_to_message.forward_from_chat)
     elif (update.reply_to_message and update.reply_to_message.from_user) and (not update.forward_from or not update.forward_from_chat):
         info = user_info(update.reply_to_message.from_user)
     try:
@@ -57,14 +57,31 @@ def user_info(user):
     text = "--**User Details:**--\n"
     text += f"\n**First Name:** `{user.first_name}`"
     text += f"\n**Last Name:** `{user.last_name},`" if user.last_name else ""
+    text += f"\n**User Id:** `{user.id}`"
     text += f"\n**User Name:** @{user.username}" if user.username else ""
     text += f"\n**User Link:** {user.mention}" if user.username else ""
-    text += f"\n**User Id:** `{user.id}`"
-    text += f"\n**DC ID:** {user.dc_id}" if user.dc_id else ""
-    text += f"\n**Is Verified:** `{user.is_verified}`" if user.is_verified else ""
-    text += f"\n**Is Fake:** {user.is_fake}" if user.is_fake else ""
-    text += f"\n**Is Scam:** {user.is_scam}" if user.is_scam else ""
+    text += f"\n**DC ID:** `{user.dc_id}`" if user.dc_id else ""
+    text += f"\n**Is Verified:** True" if user.is_verified else ""
+    text += f"\n**Is Restricted:** True" if user.is_verified else ""
+    text += f"\n**Is Creator:** True" if user.is_creator else ""
+    text += f"\n**Is Scam:** True" if user.is_scam else ""
+    text += f"\n**Is Fake:** True" if user.is_fake else ""    
     text += f"\n**Language Code:** {user.language_code}" if user.language_code else ""
+    text += f"\n\nMade by @FayasNoushad"
+    return text
+
+def chat_info(chat):
+    text = "--**Chat Details**--\n" 
+    text += f"\n**Title:** `{chat.title}`"
+    text += f"\n**Chat ID:** `{chat.id}`"
+    text += f"\n**Username:** @{chat.username}" if chat.username else ""
+    text += f"\n**Type:** `{chat.type}`"
+    text += f"\n**DC ID:** `{chat.dc_id}`"
+    text += f"\n**Is Verified:** True" if chat.is_verified else ""
+    text += f"\n**Is Restricted:** True" if chat.is_verified else ""
+    text += f"\n**Is Creator:** True" if chat.is_creator else ""
+    text += f"\n**Is Scam:** True" if chat.is_scam else ""
+    text += f"\n**Is Fake:** True" if chat.is_fake else ""
     text += f"\n\nMade by @FayasNoushad"
     return text
 
