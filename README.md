@@ -1,6 +1,6 @@
 # Info-Bot
 
-A telegram user or chat info bot.
+A telegram user or chat information finder bot.
 
 ---
 
