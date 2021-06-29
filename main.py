@@ -37,18 +37,18 @@ async def start(bot, update):
 async def info(bot, update):
     if update.text == '/info' or update.text == '/information':
         if (not update.reply_to_message) and (not update.forward_from or update.forward_from_chat):
-            user = update.from_user
+            info = user_info(update.from_user)
         if update.reply_to_message and update.reply_to_message.forward_from:
-            user = update.forward_from
+            info = user_info(forward_from)
         if update.reply_to_message and update.reply_to_message.forward_from_chat:
-            user = update.forward_from_chat
-    info = user_info(user)
-    await update.reply_text(
-        text=info,
-        reply_markup=BUTTONS,
-        disable_web_page_preview=True,
-        quote=True
-    )
+            chat = update.forward_from_chat 
+    try:
+        await update.reply_text(
+            text=info,
+            reply_markup=BUTTONS,
+            disable_web_page_preview=True,
+            quote=True
+        )
 
 def user_info(user):
     text = "--**User Details:**--\n"
