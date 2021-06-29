@@ -1,6 +1,6 @@
 {
     "name": "Info-Bot",
-    "description": "User or Chat Information finder telegram bot",
+    "description": "A telegram user or chat information finder bot",
     "repository": "https://github.com/FayasNoushad/Info-Bot",
     "keywords": [
         "telegram",
