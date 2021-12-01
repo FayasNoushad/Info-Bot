@@ -1,9 +1,3 @@
-# Made with python3
-# (C) @FayasNoushad
-# Copyright permission under MIT License
-# All rights reserved by FayasNoushad
-# License -> https://github.com/FayasNoushad/Info-Bot/blob/main/LICENSE
-
 import os
 import telegraminfo
 from pyrogram import Client, filters
@@ -17,22 +11,24 @@ Bot = Client(
     api_hash = os.environ["API_HASH"]
 )
 
-START_TEXT = """Hello {}, I am a user or chat information finder telegram bot.
+START_TEXT = """Hello {},
+I am a user or chat information finder telegram bot.
 
 - Send /info for your info
 - Send /info reply to a forward message for chat or user info
 
 Made by @FayasNoushad"""
 
-BUTTONS = InlineKeyboardMarkup([[InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='https://telegram.me/FayasNoushad')]])
+BUTTONS = InlineKeyboardMarkup(
+    [[InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='https://telegram.me/FayasNoushad')]]
+)
 
 
 @Bot.on_message(filters.private & filters.command(["start"]))
 async def start(bot, update):
-    text = START_TEXT.format(update.from_user.mention)
     reply_markup = BUTTONS
     await update.reply_text(
-        text=text,
+        text=START_TEXT.format(update.from_user.mention),
         disable_web_page_preview=True,
         reply_markup=reply_markup,
         quote=True
