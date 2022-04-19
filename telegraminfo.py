@@ -17,6 +17,7 @@ def user(user):
     text += f"\n**Status:** {user.status}" if user.status else ""
     return text
 
+
 def chat(chat):
     text = "--**Chat Details**--\n" 
     text += f"\n**Title:** `{chat.title}`"
