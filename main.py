@@ -16,16 +16,15 @@ I am a user or chat information finder telegram bot.
 
 - Send /info for your info
 - Send /info reply to a forward message for chat or user info
-
-Made by @FayasNoushad"""
+"""
 
 BUTTONS = InlineKeyboardMarkup(
-    [[InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='https://telegram.me/FayasNoushad')]]
+    [[InlineKeyboardButton("Feedback", url='https://telegram.me/FayasNoushad')]]
 )
 
 
 @Bot.on_message(filters.private & filters.command(["start"]))
-async def start(bot, update):
+async def start(_, update):
     reply_markup = BUTTONS
     await update.reply_text(
         text=START_TEXT.format(update.from_user.mention),
@@ -36,7 +35,7 @@ async def start(bot, update):
 
 
 @Bot.on_message((filters.private | filters.group) & filters.command(["info", "information"]))
-async def info(bot, update):
+async def info(_, update):
     if (not update.reply_to_message) and ((not update.forward_from) or (not update.forward_from_chat)):
         info = telegraminfo.user(update.from_user)
     elif update.reply_to_message and update.reply_to_message.forward_from:
